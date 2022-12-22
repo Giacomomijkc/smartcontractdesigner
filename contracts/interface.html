@@ -123,26 +123,25 @@
                 }
             }
     
-            //2- connect to smart contract Artist
-            /*const connectContractArtist = async () => {
-                const ABI = ;
-                const Address = 
+            //2- connect to smart contract
+            const connectContractArtist = async () => {
+                const ABI = [];
+                const Address = "";
                 window.web3 = await new Web3(window.ethereum);
                 window.contract = await new window.web3.eth.Contract( ABI, Address); 
                 document.getElementById("connectToContractArtist").innerHTML = "connected to smart contract";
-            }*/
+            }
 
-              //2- connect to smart contract Client
-            /*const connectContractClient = async () => {
-                const ABI = ;
-                const Address = 
+            const connectContractClient = async () => {
+                const ABI = [];
+                const Address = "";
                 window.web3 = await new Web3(window.ethereum);
                 window.contract = await new window.web3.eth.Contract( ABI, Address); 
                 document.getElementById("contractAccountClient").innerHTML = "connected to smart contract";
-            }*/
+            }
     
-            //3-read datas from smart contract
-            /*const readContractArtist = async () => {
+            //3- read datas from smart contract
+            const readContractArtist = async () => {
                 const contractValue = await window.contract.methods.value().call();
                 document.getElementById("dealValueArea").innerHTML = value;
 
@@ -192,20 +191,29 @@
                 const contractBalance = await window.contract.methods.balanceOf().call();
                 document.getElementById("balanceContractArea").innerHTML = balanceOf;
             }
-            */
+            
+            //4- deposit from Client
             const depositContract = async () => {
                 const amount = document.getElementById("depositInput").value;
                 await window.contract.methods.depositByClient().send({from: account, value: amount});
             }
+
+            //5- approve conditions from Client
             const approveConditions = async () => {
                 await window.contract.methods.approveConditions().call();
             }  
+
+            //6- request rework from Client
             const askRework = async () => {
                 await window.contract.methods.reworkNeeded().call();
-            }   
+            } 
+            
+            //7- approve project from Client
             const approveProject = async () => {
                 await window.contract.methods.withdrawArtist().send({from: account});
             }
+            
+            //8- terminate project from Client
             const terminateProject = async () => {
                 await window.contract.methods.withdrawClient().send({from: account});
             }
