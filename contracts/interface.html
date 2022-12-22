@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ARTIST PROTECTOR INTERFACE</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+        <style>
+            body {
+                background-color: palevioletred;
+                font-size: 20px;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                text-align: center;
+            }
+            button {
+                background-color: aquamarine;
+                font-size: 33px;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            }
+            button:hover {
+                background-color: yellow;
+            }
+        </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h3 id="WalletStatusArtist">Connect your wallet and start creating your own Smart Contract</h3>
+            <button onclick="connectMetamaskArtist()">CONNECT TO METAMASK</button> <br>
+            <p id="accountAreaArtist"></p>
+        </div>
+        <div>
+            <h3>Set the conditions of your contract filling the blanks and press initialize.</h3>
+        </div>
+        <form>
+            <div>
+               <label>Deal's value</label> 
+               <input>
+            </div>
+            <div>
+                <label>Max reworks</label> 
+                <input>
+             </div>
+             <div>
+                <label>Client's address wallet</label> 
+                <input>
+             </div>
+             <div>
+                <label>Your address Wallet</label> 
+                <input>
+             </div>
+             <br>
+             <button>INITIALIZE</button>
+        </form>
+        <br>
+        <div>        
+            <button onclick="connectContractArtist()"> CONNECT TO THE CONTRACT </button>
+            <p id="connectToContractArtist">Contract Account: Not Connected to Contract</p>
+        </div>
+        <div> 
+            <button onclick="readContractArtist()">GET DATA FROM THE CONTRACT</button>
+            <p id="dealValueArea">DEAL'S VALUE: no data to show</p>
+            <p id="maxReworkArea">MAX REWORK: no data to show</p>
+            <p id="clientAddressArea">CLIENT ADDRESS: no data to show</p>
+            <p id="contractAddressArea">CONTRACT'S ADDRESS: no data to show</p>
+            <p id="conditionsApprovedArea">CONDITION'S APPROVED: no data to show</p>
+            <p id="projectApprovedArea">PROJECT APPROVED: no data to show</p>
+            <p id="depositDoneArea">DEPOSIT DONE: no data to show</p>
+            <p id="balanceContractArea">CONTRACT BALANCE: no data to show</p>
+        </div>
+        <br>
+            //1- codice interfaccia Cliente
+        <div>
+            <h3 id="WalletStatusClient">Connect your wallet and read designer's contract</h3>
+            <button onclick="connectMetamaskClient()">CONNECT TO METAMASK</button> <br>
+            <p id="accountAreaClient"></p>
+        </div>
+        <div>        
+            <button onclick="connectContractClient()"> CONNECT TO THE CONTRACT </button>
+            <p id="contractAccountClient">Contract Account: Not Connected to Contract</p>
+        </div>
+        <div> 
+            <button onclick="readContractClient()">GET DATA FROM THE CONTRACT</button>
+            <p id="dealValueArea">DEAL'S VALUE: no data to show</p>
+            <p id="maxReworkArea">MAX REWORK: no data to show</p>
+            <p id="clientAddressArea">CLIENT ADDRESS: no data to show</p>
+            <p id="contractAddressArea">CONTRACT'S ADDRESS: no data to show</p>
+            <p id="conditionsApprovedArea">CONDITION'S APPROVED: no data to show</p>
+            <p id="projectApprovedArea">PROJECT APPROVED: no data to show</p>
+            <p id="depositDoneArea">DEPOSIT DONE: no data to show</p>
+            <p id="balanceContractArea">CONTRACT BALANCE: no data to show</p>
+        </div>
+        <div>
+            <button onclick="depositContract()">DEPOSIT CONTRACT'S VALUE</button><br>
+            <input type="number" id="depositInput" placeholder="Enter Amount"><br> <br>
+            <button onclick="approveConditions()">APPROVE CONTRACT CONDITIONS</button> <br>
+            <br>
+            <button onclick="askRework()">ASK FOR A REWORK</button> <br>
+            <br>
+            <button onclick="approveProject()">APPROVE AND PAY DESIGNER</button> <br>
+            <br>
+            <button onclick="terminateProject()">TERMINATE AND GET BACK YOUR MONEY</button> <br>
+        </div>
+        <script>
+            //1- connect metamask
+            let account;
+            const connectMetamaskArtist = async () => {
+                if(window.ethereum !== "undefined") {
+                    const accounts = await ethereum.request({method: "eth_requestAccounts"});
+                    account = accounts[0];
+                    document.getElementById("accountAreaArtist").innerHTML = account;
+                    document.getElementById("WalletStatusArtist").innerHTML = "CONNECTED";
+                }
+            }
+
+            const connectMetamaskClient = async () => {
+                if(window.ethereum !== "undefined") {
+                    const accounts = await ethereum.request({method: "eth_requestAccounts"});
+                    account = accounts[0];
+                    document.getElementById("accountAreaClient").innerHTML = account;
+                    document.getElementById("WalletStatusClient").innerHTML = "CONNECTED";
+                }
+            }
+    
+            //2- connect to smart contract Artist
+            /*const connectContractArtist = async () => {
+                const ABI = ;
+                const Address = 
+                window.web3 = await new Web3(window.ethereum);
+                window.contract = await new window.web3.eth.Contract( ABI, Address); 
+                document.getElementById("connectToContractArtist").innerHTML = "connected to smart contract";
+            }*/
+
+              //2- connect to smart contract Client
+            /*const connectContractClient = async () => {
+                const ABI = ;
+                const Address = 
+                window.web3 = await new Web3(window.ethereum);
+                window.contract = await new window.web3.eth.Contract( ABI, Address); 
+                document.getElementById("contractAccountClient").innerHTML = "connected to smart contract";
+            }*/
+    
+            //3-read datas from smart contract
+            /*const readContractArtist = async () => {
+                const contractValue = await window.contract.methods.value().call();
+                document.getElementById("dealValueArea").innerHTML = value;
+
+                const reworkNumber = await window.contract.methods.limitOfRework().call();
+                document.getElementById("maxReworkArea").innerHTML = reworkNumber;
+
+                const clientAddress = await window.contract.methods.client().call();
+                document.getElementById("clientAddressArea").innerHTML = clientAddress;
+
+                const contractAddress = await window.contract.methods.contractAddress().call();
+                document.getElementById("contractAddressArea").innerHTML = contractAddress;
+
+                const conditionsApproved = await window.contract.methods.conditionsApproved().call();
+                document.getElementById("conditionsApprovedArea").innerHTML = conditionsApproved;
+
+                const projectApproved = await window.contract.methods.projectApproved().call();
+                document.getElementById("projectApprovedArea").innerHTML = projectApproved;
+
+                const depositDone = await window.contract.methods.depositDone().call();
+                document.getElementById("depositDoneArea").innerHTML = depositDone;
+
+                const contractBalance = await window.contract.methods.balanceOf().call();
+                document.getElementById("balanceContractArea").innerHTML = balanceOf;
+            }
+            const readContractClient = async () => {
+                const contractValue = await window.contract.methods.value().call();
+                document.getElementById("dealValueArea").innerHTML = value;
+
+                const reworkNumber = await window.contract.methods.limitOfRework().call();
+                document.getElementById("maxReworkArea").innerHTML = reworkNumber;
+
+                const clientAddress = await window.contract.methods.client().call();
+                document.getElementById("clientAddressArea").innerHTML = clientAddress;
+
+                const contractAddress = await window.contract.methods.contractAddress().call();
+                document.getElementById("contractAddressArea").innerHTML = contractAddress;
+
+                const conditionsApproved = await window.contract.methods.conditionsApproved().call();
+                document.getElementById("conditionsApprovedArea").innerHTML = conditionsApproved;
+
+                const projectApproved = await window.contract.methods.projectApproved().call();
+                document.getElementById("projectApprovedArea").innerHTML = projectApproved;
+
+                const depositDone = await window.contract.methods.depositDone().call();
+                document.getElementById("depositDoneArea").innerHTML = depositDone;
+
+                const contractBalance = await window.contract.methods.balanceOf().call();
+                document.getElementById("balanceContractArea").innerHTML = balanceOf;
+            }
+            */
+            const depositContract = async () => {
+                const amount = document.getElementById("depositInput").value;
+                await window.contract.methods.depositByClient().send({from: account, value: amount});
+            }
+            const approveConditions = async () => {
+                await window.contract.methods.approveConditions().call();
+            }  
+            const askRework = async () => {
+                await window.contract.methods.reworkNeeded().call();
+            }   
+            const approveProject = async () => {
+                await window.contract.methods.withdrawArtist().send({from: account});
+            }
+            const terminateProject = async () => {
+                await window.contract.methods.withdrawClient().send({from: account});
+            }
+        </script>
+    </body>
+</html>
+
+
+
